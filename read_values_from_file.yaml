@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+   - variable_values.yaml
+   - variable_values.json
+
+  tasks:
+   - debug:
+      msg:
+       - var: pkgs

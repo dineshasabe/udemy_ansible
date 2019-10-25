@@ -1,0 +1,17 @@
+---
+- name: Play for Arithmetic Operations
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: 20
+   y: 10
+  tasks:
+  - name: Display Values
+    debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{x+y}}"
+     - "{{x}} - {{y}} = {{x-y}}"
+     - "{{x}} * {{y}} = {{x*y}}"
+     - "{{x}} / {{y}} = {{x/y}}"

@@ -1,0 +1,77 @@
+
+---
+- name: Arithmetic Practice
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: 20
+   y: 10
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}} and type is {{x|type_debug}}"
+     - "The value of y is: {{y}} and type is {{y|type_debug}}"
+___________________________________________________________
+
+---
+- name: Play for Arithmetic Operations
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: 20
+   y: 10
+  tasks:
+  - name: Display Values
+    debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{x+y}}"
+     - "{{x}} - {{y}} = {{x-y}}"
+     - "{{x}} * {{y}} = {{x*y}}"
+     - "{{x}} / {{y}} = {{x/y}}"
+
+____________________________________________________________
+
+---
+- name: Read values from Command Prompt and perform arithmetic operations
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+  - name: x
+    prompt: Please enter value x
+    private: no
+  - name: y
+    prompt: Please enter value y
+    private: no
+
+  vars:
+   a: 30
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{ x|int + y|int }}"
+     - "{{a}} + {{y}} = {{a + y|int}}"
+
+______________________________________________________________
+
+---
+- name: Read values from other files and perform arithmetic operations
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+   - variable_values.yaml
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{x+y}}"
+
+______________________________________________________________

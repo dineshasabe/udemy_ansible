@@ -1,0 +1,170 @@
+
+---
+- name: Arithmetic Practice
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: 20
+   y: 10
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}} and type is {{x|type_debug}}"
+     - "The value of y is: {{y}} and type is {{y|type_debug}}"
+=========================================================================
+
+---
+- name: Play for Arithmetic Operations
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: 20
+   y: 10
+  tasks:
+  - name: Display Values
+    debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{x+y}}"
+     - "{{x}} - {{y}} = {{x-y}}"
+     - "{{x}} * {{y}} = {{x*y}}"
+     - "{{x}} / {{y}} = {{x/y}}"
+
+===========================================================================
+
+---
+- name: Read values from Command Prompt and perform arithmetic operations
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+  - name: x
+    prompt: Please enter value x
+    private: no
+  - name: y
+    prompt: Please enter value y
+    private: no
+
+  vars:
+   a: 30
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{ x|int + y|int }}"
+     - "{{a}} + {{y}} = {{a + y|int}}"
+
+=============================================================================
+
+---
+- name: Read values from other files and perform arithmetic operations
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+   - variable_values.yaml
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is: {{y}}"
+     - "{{x}} + {{y}} = {{ x+y }}"
+
+==============================================================================
+
+---
+- name: Working with comparision operators
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: 20
+   y: 10
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is: {{x}}"
+     - "The value of y is : {{y}}"
+     - "x == y : {{ x == y}}"
+     - "x != y : {{ x != y}}"
+     - "x < y : {{ x < y}}"
+     - "x > y : {{ x > y}}"
+     - "x <= y : {{ x <= y}}"
+     - "x >= y : {{ x >= y}}"
+
+=============================================================================
+
+---
+- name: Working with Membership Operators
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: [3,4,5]
+   y: 5
+  tasks:
+  - debug:
+     msg:
+     - "The list or sequence of x is {{x}} and value of y is {{y}}"
+     - "y in x: {{ y in x }}"
+     - "10 in x: {{ 10 in x }}"
+     - "20 not in x: {{ 20 not in x }}"
+     - "y not in x: {{ y not in x }}"
+
+===============================================================================
+
+---
+- name: Working with Test Operator
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 50
+   my_name: 'ansible'
+   my_path: "/root/udemy_ansible/membership_operators.yaml"
+   my_link_path: "/root/udemy_ansible/operators.yaml"
+
+  tasks:
+  - debug:
+     msg:
+     - "x is defined: {{ x is defined }}"
+     - "y is defined: {{ y is defined }}"
+     - "z is undefined: {{ z is undefined }}"
+     - "my_name is lower: {{ my_name is lower }}"
+     - "my_name is upper: {{ my_name is upper }}"
+     - "my_name is string: {{ my_name is string }}"
+     - "x is divisibleby 2: {{ x is divisibleby 2 }}"
+     - "x is even: {{ x is even }}"
+     - "x is odd: {{ x is odd }}"
+     - "x is number: {{ x is number }}"
+     - "The given path is: {{ my_path }}"
+     - "my_path is file: {{ my_path is file }}"
+     - "my_path is directory: {{ my_path is directory }}"
+     - "my_path is exists: {{ my_path is exists }}"
+     - "my_link_path is link: {{ my_link_path is link }}"
+
+================================================================================
+
+---
+- name: Working with Logical Operators
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 5
+   y: 7
+   z: [4,5,6]
+
+  tasks:
+  - debug:
+     msg:
+     - "The value of x is:{{x}}, The value of y is:{{y}} and value of z is: {{z}}"
+     - "x<y and y in z : {{ x<y and y in z }}"
+     - "{{ (4<5) and (5>1) and (5>2) and (9==0) }}"
+     - "{{ (4<5) or (5>1) or (5>2) or (9==0) }}"
+
+======================================================================================
+
+

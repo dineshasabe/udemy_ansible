@@ -1,0 +1,18 @@
+---
+- hosts: web
+  gather_facts: no
+  
+  vars:
+    x: 23
+    my_num: 45.23
+    my_name: "Dinesh Asabe"
+    my_boolean: false
+
+  tasks:
+  - debug:
+      msg:
+      - "The value of x is: {{x}} and type: {{x|type_debug}}"
+      - "The value of my_num is: {{my_num}} and type: {{my_num|type_debug}}"
+      - "The value of my_name is: {{my_name}} and type: {{my_name|type_debug}}"
+      - "The value of my_boolean is: {{my_boolean}} and type: {{my_boolean|type_debug}}"
+

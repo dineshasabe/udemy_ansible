@@ -1,0 +1,22 @@
+---
+- name: Operations on string and vars using filters and methods
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: "this Is aboUt Ansible fIlTers AND methods"
+   y: "56"
+   z: [1,2,3,4,5]
+
+  tasks:
+  - debug:
+     msg:
+      - "{{x|lower}}"
+      - "{{x.lower()}}"
+      - "{{x|upper}}"
+      - "{{x.upper()}}"
+      - "{{x|title}}"
+      - "{{y|int}}"
+      - "The max from z is: {{z|max}}"
+      - "The min from z is: {{z|min}}"
+

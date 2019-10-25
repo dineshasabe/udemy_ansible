@@ -1,0 +1,56 @@
+---
+- name: A simple play for Error Handling
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - command: "ls /homee"
+      register: home_out
+      #ignore_errors: yes
+    - debug: var=home_out.stdout
+    - command: "ls /tmp"
+      register: tmp_out
+    - debug: var=tmp_out.stdout
+
+========================================================
+
+Notes: Ansible stops playbook execution on a task failure 
+and we can choose to ignore_errors=yes to continue with remaining steps 
+
+
+---
+- name: A simple Play for Error Handling
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Starting nginx
+      service:
+        name: nginx
+        state: started
+      ignore_errors: yes
+
+    - name: Starting apache
+      service:
+        name: apache2
+        state: started
+
+========================================================
+
+---
+- name: Error Handling(Sometimes you need to fail a play )
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - command: "ls /home"
+      register: out
+      failed_when: out.rc==0
+    - debug: var=out
+
+#    - command: "ls /home"
+#      register: out
+#    - fail:
+#        msg: "Failed because rc is 0"
+#      when: out.rc==0
+
+==================================================================
+
+

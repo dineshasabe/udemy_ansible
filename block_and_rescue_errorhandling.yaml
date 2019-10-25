@@ -1,0 +1,18 @@
+#resuce and always are try and except blocks
+
+---
+- name: A play for block and rescue error handling
+  hosts: localhost
+  gather_facts: no
+  tasks:
+  - block:
+    - name: Finding files in /root/udemy_ansible
+      command: "ls /root/udemy_ansible"
+      register: out
+    - debug: var=out.stdout_lines
+    rescue:
+     - debug:
+        msg: "the given path: /root/udemy_ansible is not a valid path"
+    always:
+     - debug:
+        msg: "This will always execute"

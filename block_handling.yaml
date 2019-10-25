@@ -1,0 +1,29 @@
+---
+- name: A play for block handling
+  hosts: localhost
+  gather_facts: no
+  tasks:
+  - block:
+    - name: Installing httpd for RedHat os family
+      yum:
+       name: httpd
+       state: present
+    - name: starting httpd for RedHat os family
+      service:
+       name: httpd
+       state: started
+    when: ansible_os_family == "RedHat"
+    become: yes
+
+  - block:
+    - name: Installing apache for Debian os family
+      apt:
+       name: apache2
+       state: present
+    - name: starting apache for Debian os family
+      service:
+       name: apache2
+       state: started
+    when: ansible_os_family == "Debian"
+    become: yes
+

@@ -1,0 +1,20 @@
+---
+- name: Simple Play to install httpd and apache
+  hosts: web
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: Installing httpd using yum
+    yum:
+     name: httpd
+     state: present
+    when: ansible_distribution != "Ubuntu"
+    #become: yes
+
+  - name: Installing apache using apt
+    apt:
+     name: apache2
+     state: present
+    when: ansible_distribution == "Ubuntu"
+    #become: yes
+

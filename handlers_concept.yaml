@@ -1,0 +1,17 @@
+---
+- name: Working with Handlers with handlers block
+  hosts: localhost
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Installing Apache
+      apt:
+        name: apache2
+        state: present
+      notify: 
+        - start apache2
+  handlers:
+    - name: start apache2  
+      service:
+        name: apache2
+        state: started

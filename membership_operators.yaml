@@ -1,0 +1,16 @@
+---
+- name: Working with Membership Operators
+  hosts: localhost
+  gather_facts: no
+  vars:
+   x: [3,4,5]
+   y: 5
+  tasks:
+  - debug:
+     msg:
+     - "The list or sequence of x is {{x}} and value of y is {{y}}"
+     - "y in x: {{ y in x }}"
+     - "10 in x: {{ 10 in x }}"
+     - "20 not in x: {{ 20 not in x }}"
+     - "y not in x: {{ y not in x }}"
+

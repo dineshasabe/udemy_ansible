@@ -1,0 +1,98 @@
+---
+- name: Working with Conditional statement
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 5
+   y: 67
+   my_list: [5,6,7]
+
+  tasks:
+  - debug:
+     msg:
+     - "the value of x is {{x}} and value of y is {{y}}"
+    when: x==y
+
+  - debug:
+     msg:
+     - "x is present in my_list"
+    when: x in my_list
+
+====================================================================
+
+---
+- name: Simple Play to install httpd and apache
+  hosts: web
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: Installing httpd using yum
+    yum:
+     name: httpd
+     state: present
+    when: ansible_distribution != "Ubuntu"
+    #become: yes
+
+  - name: Installing apache using apt
+    apt:
+     name: apache2
+     state: present
+    when: ansible_distribution == "Ubuntu"
+    #become: yes
+
+=======================================================================
+
+---
+- name: Working with inline conditional statement without if-else
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 20
+   y: 10
+  tasks:
+  - debug:
+     msg:
+     - "the largest from {{x}} and {{y}}  is {{x}}"
+    when: x>y
+
+  - debug:
+     msg:
+     - "the largest from {{x}} and {{y}} is {{y}}"
+    when: y>x
+
+=======================================================================
+
+---
+- name: Working with inline conditional statement with if-else
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 20
+   y: 10
+  tasks:
+  - debug:
+     msg:
+     - "the largest from {{x}} and {{y}}  is : {{ x if (x>y) else y }}"
+
+=========================================================================
+
+---
+- name: Working with inline conditional statement with if-else
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 20
+   y: 10
+   larger: "{{x if (x>y) else y}}"
+  tasks:
+  - debug:
+     msg:
+     - "the largest from {{x}} and {{y}}  is : {{ larger }}"
+
+=========================================================================
+
+

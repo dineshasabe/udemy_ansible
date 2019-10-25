@@ -1,0 +1,20 @@
+---
+- name: Working with inline conditional statement with if-else
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+   x: 20
+   y: 10
+   larger: "{{x if (x>y) else y}}"
+  tasks:
+  - debug:
+     msg:
+     - "the largest from {{x}} and {{y}}  is : {{ larger }}"
+#    when: x>y
+
+#  - debug:
+#     msg:
+#     - "the largest from {{x}} and {{y}} is {{y}}"
+#    when: y>x
+

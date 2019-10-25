@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+   x: 45
+  tasks:
+  - debug:
+     msg:
+     - "The x value is: {{x}}"
+     - "The y value is: {{y}}" 

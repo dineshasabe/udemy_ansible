@@ -1,0 +1,15 @@
+---
+- name: Error Handling(Sometimes you need to fail a play )
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - command: "ls /home"
+      register: out
+      failed_when: out.rc==0
+    - debug: var=out
+
+#    - command: "ls /home"
+#      register: out
+#    - fail:
+#        msg: "Failed because rc is 0"
+#      when: out.rc==0
